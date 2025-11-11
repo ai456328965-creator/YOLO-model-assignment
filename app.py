@@ -151,7 +151,6 @@ with col2:
         
         # Get annotated image
         annotated_img = results[0].plot()
-        annotated_img = cv2.cvtColor(annotated_img, cv2.COLOR_BGR2RGB)
         
         # Display annotated image
         st.image(annotated_img, caption="Detected Fractures", use_container_width=True)
@@ -221,4 +220,5 @@ st.markdown("""
     <p style='text-align: center; color: #666; font-size: 0.9rem;'>
     Hand Fracture Detection System | Powered by YOLOv8 & Streamlit
     </p>
+
 """, unsafe_allow_html=True)
