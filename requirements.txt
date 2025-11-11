@@ -1,4 +1,10 @@
-streamlit
 ultralytics
+streamlit
 opencv-python
 pillow
+torch
+torchvision
+numpy
+matplotlib
+scipy
+pandas
