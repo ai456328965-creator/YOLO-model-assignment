@@ -67,6 +67,28 @@ st.markdown("""
 
 # Sidebar
 with st.sidebar:
+    st.header("⚙️ Configuration")
+    
+    # Confidence threshold
+    st.subheader("Detection Settings")
+    confidence_threshold = st.slider(
+        "Confidence Threshold",
+        min_value=0.0,
+        max_value=1.0,
+        value=0.25,
+        step=0.05,
+        help="Minimum confidence score for detection"
+    )
+    
+    # IOU threshold
+    iou_threshold = st.slider(
+        "IOU Threshold",
+        min_value=0.0,
+        max_value=1.0,
+        value=0.45,
+        step=0.05,
+        help="Intersection over Union threshold for NMS"
+    )
     
     st.markdown("---")
     st.subheader("ℹ️ About")
@@ -74,13 +96,12 @@ with st.sidebar:
     This application uses a trained YOLO model to detect fractures in hand X-ray images.
     
     **How to use:**
-    1. Upload your model file (best.pt)
-    2. Adjust detection thresholds
-    3. Upload an X-ray image
-    4. View detection results
+    1. Adjust detection thresholds if needed
+    2. Upload an X-ray image
+    3. View detection results
     """)
 
-# Load model
+# Load model automatically from repository
 @st.cache_resource
 def load_model(model_path):
     try:
@@ -90,26 +111,16 @@ def load_model(model_path):
         st.error(f"Error loading model: {str(e)}")
         return None
 
-# Process model file upload
-if model_file is not None:
-    with tempfile.NamedTemporaryFile(delete=False, suffix='.pt') as tmp_file:
-        tmp_file.write(model_file.read())
-        model_path = tmp_file.name
-    
-    with st.spinner("Loading model..."):
-        st.session_state.model = load_model(model_path)
-        if st.session_state.model is not None:
-            st.session_state.model_loaded = True
-            st.sidebar.success("✅ Model loaded successfully!")
-else:
-    # Try to load from default path if exists
-    if os.path.exists("best.pt"):
-        if not st.session_state.model_loaded:
-            with st.spinner("Loading model from best.pt..."):
-                st.session_state.model = load_model("best.pt")
-                if st.session_state.model is not None:
-                    st.session_state.model_loaded = True
-                    st.sidebar.success("✅ Model loaded from best.pt!")
+# Try to load model from repository
+if not st.session_state.model_loaded:
+    model_path = "best.pt"  # Model should be in your repository
+    if os.path.exists(model_path):
+        with st.spinner("Loading model..."):
+            st.session_state.model = load_model(model_path)
+            if st.session_state.model is not None:
+                st.session_state.model_loaded = True
+    else:
+        st.error("⚠️ Model file 'best.pt' not found in repository. Please ensure best.pt is uploaded to your GitHub repository.")
 
 # Main content area
 if not st.session_state.model_loaded:
@@ -229,5 +240,4 @@ st.markdown("""
     <p style='text-align: center; color: #666; font-size: 0.9rem;'>
     Hand Fracture Detection System | Powered by YOLOv8 & Streamlit
     </p>
-
 """, unsafe_allow_html=True)
