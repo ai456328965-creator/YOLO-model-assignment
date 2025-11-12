@@ -67,36 +67,6 @@ st.markdown("""
 
 # Sidebar
 with st.sidebar:
-    st.header("⚙️ Configuration")
-    
-    # Model file upload
-    st.subheader("1. Load Model")
-    model_file = st.file_uploader(
-        "Upload your best.pt model file",
-        type=['pt'],
-        help="Upload the trained YOLO model file"
-    )
-    
-    # Confidence threshold
-    st.subheader("2. Detection Settings")
-    confidence_threshold = st.slider(
-        "Confidence Threshold",
-        min_value=0.0,
-        max_value=1.0,
-        value=0.25,
-        step=0.05,
-        help="Minimum confidence score for detection"
-    )
-    
-    # IOU threshold
-    iou_threshold = st.slider(
-        "IOU Threshold",
-        min_value=0.0,
-        max_value=1.0,
-        value=0.45,
-        step=0.05,
-        help="Intersection over Union threshold for NMS"
-    )
     
     st.markdown("---")
     st.subheader("ℹ️ About")
@@ -259,4 +229,5 @@ st.markdown("""
     <p style='text-align: center; color: #666; font-size: 0.9rem;'>
     Hand Fracture Detection System | Powered by YOLOv8 & Streamlit
     </p>
+
 """, unsafe_allow_html=True)
