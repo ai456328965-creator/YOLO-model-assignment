@@ -69,26 +69,6 @@ st.markdown("""
 with st.sidebar:
     st.header("⚙️ Configuration")
     
-    # Confidence threshold
-    st.subheader("Detection Settings")
-    confidence_threshold = st.slider(
-        "Confidence Threshold",
-        min_value=0.0,
-        max_value=1.0,
-        value=0.25,
-        step=0.05,
-        help="Minimum confidence score for detection"
-    )
-    
-    # IOU threshold
-    iou_threshold = st.slider(
-        "IOU Threshold",
-        min_value=0.0,
-        max_value=1.0,
-        value=0.45,
-        step=0.05,
-        help="Intersection over Union threshold for NMS"
-    )
     
     st.markdown("---")
     st.subheader("ℹ️ About")
@@ -241,3 +221,4 @@ st.markdown("""
     Hand Fracture Detection System | Powered by YOLOv8 & Streamlit
     </p>
 """, unsafe_allow_html=True)
+
