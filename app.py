@@ -67,10 +67,6 @@ st.markdown("""
 
 # Sidebar
 with st.sidebar:
-    st.header("⚙️ Configuration")
-    
-    
-    st.markdown("---")
     st.subheader("ℹ️ About")
     st.info("""
     This application uses a trained YOLO model to detect fractures in hand X-ray images.
@@ -219,5 +215,6 @@ st.markdown("""
     Hand Fracture Detection System | Powered by YOLOv8 & Streamlit
     </p>
 """, unsafe_allow_html=True)
+
 
 
