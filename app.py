@@ -132,8 +132,6 @@ else:
                     # Run prediction
                     results = st.session_state.model.predict(
                         img_array,
-                        conf=confidence_threshold,
-                        iou=iou_threshold,
                         verbose=False
                     )
                     
@@ -221,4 +219,5 @@ st.markdown("""
     Hand Fracture Detection System | Powered by YOLOv8 & Streamlit
     </p>
 """, unsafe_allow_html=True)
+
 
